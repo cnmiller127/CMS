@@ -136,7 +136,7 @@ function role(){
     inquirer.prompt(questions).then(function(ans){
     var {title, salary, department} = ans;
     var newRole = new Role(title, salary, department);
-    console.log(newRole);
+    //console.log(newRole);
     addRole(newRole);
     })
     }).catch(err => console.log("err", err))
@@ -145,14 +145,14 @@ function role(){
 function addRole(newRole){
     
     var depID;
-    console.log(newRole.title, newRole.department);
+    //console.log(newRole.title, newRole.department);
     asyncQuery(
         "SELECT id FROM department WHERE ?",    
           {
             depName: newRole.department
           }).then(function(res){
           depID = res[0].id;
-          console.log("role id", depID);
+          //console.log("role id", depID);
           return depID
         }).then((depID) =>{
     asyncQuery(
@@ -175,7 +175,7 @@ function employee(){
         roleArr = [];
             for(var i = 0; i < res.length; i++){
                 roleArr.push(res[i].title);
-                console.log(roleArr)
+                //console.log(roleArr)
             }
             
         return roleArr;
@@ -192,7 +192,7 @@ function employee(){
     else{ 
         isMgr = false; 
     }
-    console.log(isMgr, "IS MANAGER BABY")
+    //.log(isMgr, "IS MANAGER BABY")
     
     var newEmployee = new Employee(last_name, first_name, role, isMgr);
     addEmployee(newEmployee);
@@ -204,14 +204,14 @@ function employee(){
 function addEmployee(newEmployee){
     
     var roleID;
-    console.log(newEmployee.firstName);
+    //console.log(newEmployee.firstName);
     asyncQuery(
         "SELECT id FROM role WHERE ?",    
           {
             title: newEmployee.role
           }).then(function(res){
           roleID = res[0].id;
-          console.log("role id", roleID);
+          //console.log("role id", roleID);
           return roleID;
         }).then((roleID) =>{
     asyncQuery(
@@ -238,7 +238,7 @@ function selectEmployeeUpdate(){
     var questions = [{type:"list", name: "employee", message: "Please select employee to update employee role", choices: employeesArr}];
     inquirer.prompt(questions).then(function(ans){
     var {employee} = ans;
-    console.log(employee);
+    //console.log(employee);
     var fullName = employee.split(",");
     var last = fullName[0].trim();
     var first = fullName[1].trim();
@@ -260,7 +260,7 @@ function updateEmployee(last, first){
     }).then(function (rArr){
     var questions = [{type:"list", name: "updatedRole", message: "Please select role to update " + last + ", " + first + " role", choices: rArr}];
     inquirer.prompt(questions).then(function(ans){
-        console.log(ans, "ANS")
+        //console.log(ans, "ANS")
     var {updatedRole} = ans;
     
     //new
@@ -270,9 +270,9 @@ function updateEmployee(last, first){
           {
             title: updatedRole
           }).then(function(res){
-              console.log(updatedRole, "UPDATED ROLL")
+              //console.log(updatedRole, "UPDATED ROLL")
           roleID = res[0].id;
-          console.log("role id", roleID);
+          //console.log("role id", roleID);
           return roleID;
         }).then((roleID) =>{
             //
@@ -285,7 +285,7 @@ function updateEmployee(last, first){
             
                   ]).then(() => {
                         menu();
-                  }).catch(err => { console.log("error", err)
+                  }).catch(err => { //console.log("error", err)
                 });
 
         })
