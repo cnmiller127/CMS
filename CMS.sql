@@ -1,0 +1,29 @@
+DROP DATABASE IF EXISTS CMS_DB;
+
+CREATE DATABASE CMS_DB;
+
+USE CMS_DB;
+
+CREATE TABLE department (
+  id INT NOT NULL AUTO_INCREMENT,
+  depName VARCHAR(30) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE role (
+  id INT NOT NULL AUTO_INCREMENT,
+  title VARCHAR(30) NOT NULL,
+  salary DECIMAL,
+  department_id INT NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE employees (
+  id INT NOT NULL AUTO_INCREMENT,
+  last_name VARCHAR(30) NOT NULL,
+  first_name VARCHAR(30) NOT NULL,
+  role_id INT NOT NULL,
+  manager_id INT NULL,
+  PRIMARY KEY (id)
+);
+
